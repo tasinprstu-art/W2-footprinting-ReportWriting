@@ -20,48 +20,21 @@ W2-PM-FINAL | CYBERSECURITY | NETWORKWALKS
 
 
 
-## 2. LIABILITY DISCLAIMER
+## 1. LIABILITY DISCLAIMER
 
-<sub>I have performed these activities only on the systems & devices where I had secured written permission or the devices/systems that I own myself. All these materials are for education and research purpose only. Do not use anything from here to break the law. </sub>
----
-
-## 3. INTRODUCTION
-
-This report documents the practical activities carried out during Week 2 of my Cybersecurity Internship at Networkwalks.
-
-The exercise focused on three important areas of cybersecurity:
-
-1. Footprinting and reconnaissance.
-2. Network scanning and service discovery.
-3. Vulnerability assessment and security analysis.
-
-I used different tools available in Kali Linux to gather information about a domain, examine publicly exposed technologies, inspect DNS records, identify web security mechanisms, and discover network services.
-
-The assessment also involved using Nmap and Zenmap to understand how network scanning works, identify open ports, detect services, and visualize scan results.
-
-The objective was not simply to run security tools but to understand the information they provide, interpret the results, and identify possible security implications.
+I have performed these activities only on the systems & devices where I had secured written permission or the devices/systems that I own myself. All these materials are for education and research purpose only. Do not use anything from here to break the law.
 
 ---
 
-## 4. OBJECTIVES
+## 2. INTRODUCTION
 
-The major objectives of this exercise were:
-
-- Understand the concept of footprinting and reconnaissance.
-- Gather publicly available information about a target domain.
-- Identify domain registration and DNS information.
-- Fingerprint web technologies and server configurations.
-- Inspect HTTP response headers.
-- Identify whether a Web Application Firewall is present.
-- Enumerate DNS records.
-- Identify active hosts and open network ports.
-- Perform service and version detection using Nmap.
-- Understand Zenmap's graphical scanning and topology features.
-- Document findings and provide appropriate security recommendations.
+This report covers footprinting the networkwalks.com domain using multiple Kali Linux tools (W2-PM1) and scanning my own local network with Zenmap (W2-PM5). One module covers the footprinting phase and the other covers the scanning phase, so together they show how an attacker moves from gathering public information to mapping live hosts on a network. It is the Week 2 part of my ongoing internship program at Networkwalks.
+All commands were run in Kali Linux (footprinting) and on a Windows PC with Zenmap installed (scanning). Every step below includes the exact command used, the result I observed, a screenshot as evidence, and a short note on why the finding matters from an attacker's point of view.
 
 ---
 
-## 5. TOOLS AND TECHNOLOGIES USED
+
+## 3. TOOLS AND TECHNOLOGIES USED
 
 | Tool              | Purpose                                       |
 | ----------------- | --------------------------------------------- |
@@ -79,19 +52,14 @@ The major objectives of this exercise were:
 
 ---
 
-## 6. LAB CONFIGURATION
+##4. Activities Performed
 
-| Component               | Configuration         |
-| ----------------------- | --------------------- |
-| Host Operating System   | Windows 11 Pro        |
-| Virtualization Software | Oracle VirtualBox 7.2 |
-| Attacker Machine        | Kali Linux            |
-| RAM                     | 8 GB                  |
-| Processor               | Intel Core i5         |
-| Network Environment     | Virtual Network       |
-| Primary Target          | networkwalks.com      |
-| Secondary Target        | scanme.nmap.org       |
-| Secondary Target IP     | 45.33.32.156          |
+#4.1 Footprinting & Reconnaissance
+
+I performed reconnaissance against the networkwalks.com domain using six Kali Linux tools: WHOIS, WhatWeb, Nslookup, Curl, Wafw00f and DNSRecon. Each tool was used to collect a different type of information about the target.
+First, I used WHOIS to obtain publicly available domain registration information and identify the domain’s name servers. The results provided information about the domain registration and hosting infrastructure.
+I then used WhatWeb to identify technologies used by the website. The results identified WordPress 7.0.4 and WP Download Manager 3.3.58, along with other information exposed by the website.
+Using Nslookup, I resolved the domain name to its IP address. The provided result identified 192.232.216.135.
 
 ---
 
