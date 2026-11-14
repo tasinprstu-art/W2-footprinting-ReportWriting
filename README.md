@@ -52,509 +52,162 @@ All commands were run in Kali Linux (footprinting) and on a Windows PC with Zenm
 
 ---
 
-##4. Activities Performed
+# 4. Activities Performed
 
-#4.1 Footprinting & Reconnaissance
+## 4.1 Footprinting & Reconnaissance
 
-I performed reconnaissance against the networkwalks.com domain using six Kali Linux tools: WHOIS, WhatWeb, Nslookup, Curl, Wafw00f and DNSRecon. Each tool was used to collect a different type of information about the target.
-First, I used WHOIS to obtain publicly available domain registration information and identify the domain’s name servers. The results provided information about the domain registration and hosting infrastructure.
-I then used WhatWeb to identify technologies used by the website. The results identified WordPress 7.0.4 and WP Download Manager 3.3.58, along with other information exposed by the website.
-Using Nslookup, I resolved the domain name to its IP address. The provided result identified 192.232.216.135.
+I performed reconnaissance against the networkwalks.com domain using six Kali Linux tools: **WHOIS, WhatWeb, Nslookup, Curl, Wafw00f and DNSRecon**. Each tool was used to collect a different type of information about the target.
 
----
 
-# 7. FOOTPRINTING AND RECONNAISSANCE
+First, I used **WHOIS** to obtain publicly available domain registration information and identify the domain’s name servers. The results provided information about the domain registration and hosting infrastructure.
+I then used **WhatWeb** to identify technologies used by the website. The results identified **WordPress 7.0.4** and **WP Download Manager 3.3.58**, along with other information exposed by the website.
+Using **Nslookup**, I resolved the domain name to its IP address. The provided result identified **192.232.216.135**.
 
-Footprinting is the process of gathering information about a target before conducting deeper security assessments.
 
-During this phase, I used several Kali Linux tools to examine different aspects of the target's publicly accessible infrastructure.
 
-## 7.1 WHOIS Lookup
+I used **Curl** with the -I option to inspect the HTTP response headers. This provided additional information about the web application and exposed the WordPress REST API endpoint /wp-json/.
+Next, I used **Wafw00f** to determine whether a Web Application Firewall was protecting the website. The result identified **ModSecurity (SpiderLabs)**.
 
-**Tool:** WHOIS
 
-**Command:**
-
-```bash
-whois networkwalks.com
-```
-
-**Purpose:**
-
-To retrieve publicly available domain registration information, including registrar details, registration dates, expiry dates, and name servers.
-
-**Findings:**
-
-- Domain registration information was retrieved.
-- Registrar details were identified.
-- Domain creation and expiry dates were observed.
-- Name server information was collected.
-- Registrant information was privacy-protected.
-- HostGator hosting infrastructure was identified from the available records.
-
-**Security Relevance:**
-
-WHOIS information can provide useful intelligence during reconnaissance. Attackers may use publicly available registration information to understand domain ownership and hosting infrastructure.
-
-**Evidence:**
-![WHOIS Lookup Result](whoisresult.png.png)
+Finally, I used **DNSRecon** to enumerate DNS records. The results provided information relating to name servers, mail servers, SPF/TXT records, service records and DNS software information.
 
 
 ---
 
-## 7.2 WhatWeb – Technology Fingerprinting
-
-**Tool:** WhatWeb
-
-**Commands:**
-
-```bash
-whatweb networkwalks.com
-```
-
-```bash
-whatweb -v networkwalks.com
-```
-
-**Purpose:**
-
-To identify technologies and components used by the target website.
-
-**Findings:**
-
-- WordPress was identified as the website's content management system.
-- WordPress version 7.1.4 was reported.
-- WP Download Manager plugin version 3.3.76 was identified.
-- Additional server and web technology information was collected.
-
-**Security Relevance:**
-
-Technology fingerprinting helps security professionals understand the software components running on a website.
-
-Exposed software versions can be compared against known security advisories to determine whether further investigation is necessary.
-
-**Evidence:**
-### WhatWeb Technology Detection
-
-![WhatWeb Scan Result](whatweb.png.png)
+## 4.2 Network Scanning with Zenmap
 
 
----
-
-## 7.3 Nslookup – DNS Resolution
-
-**Tool:** Nslookup
-
-**Command:**
-
-```bash
-nslookup networkwalks.com
-```
-
-**Purpose:**
-
-To resolve the target domain name into its corresponding IP address.
-
-**Findings:**
-
-- The DNS resolution process was performed.
-- The domain's IP address was retrieved.
-- The DNS server responded to the query.
-
-**Security Relevance:**
-
-DNS resolution helps identify the IP infrastructure associated with a domain. This information can support subsequent network reconnaissance and infrastructure analysis.
-
-**Evidence:**
-![NS Lookup Result](nslookup.png.png)
+For the second activity, I used **Zenmap** to perform network discovery on my local network. The practical required me to identify my local IP address and subnet, discover live hosts, identify their IP and MAC addresses, and generate a network topology.
 
 
----
-
-## 7.4 cURL – HTTP Header Inspection
-
-**Tool:** cURL
-
-**Command:**
-
-```bash
-curl -I https://networkwalks.com
-```
-
-**Purpose:**
-
-To inspect HTTP response headers returned by the target web server.
-
-**Findings:**
-
-- The server returned an HTTP 200 OK response.
-- Server response information was collected.
-- Content-Type and other response headers were inspected.
-- HTTPS communication was successfully established.
-
-**Security Relevance:**
-
-HTTP response headers can reveal information about server configuration and security controls.
-
-Security-related headers such as Content-Security-Policy, Strict-Transport-Security, and X-Content-Type-Options should be reviewed to determine whether appropriate protections are implemented.
-
-**Evidence:**
-![CURL Result](curl.png.png)
+I first used the Windows ipconfig command to identify my local IP address and LAN subnet. I then entered the subnet into Zenmap and selected **Ping Scan** to identify active hosts.
+The example results provided in the practical identified four live hosts:
 
 
----
+•	10.0.0.1
 
-## 7.5 WAFW00F – Web Application Firewall Detection
 
-**Tool:** WAFW00F
+•	10.0.0.4
 
-**Commands:**
 
-```bash
-wafw00f networkwalks.com
-```
+•	10.0.0.19
 
-```bash
-wafw00f https://networkwalks.com
-```
 
-**Purpose:**
+•	10.0.0.5
 
-To identify whether the target website uses a Web Application Firewall.
 
-**Findings:**
+The example results also included four MAC addresses.
 
-- ModSecurity (SpiderLabs) was identified.
-- The results indicated the presence of a Web Application Firewall.
+After completing the scan, I opened the **Topology** section in Zenmap, enabled the legend and saved the network topology in PDF format as required by the practical task.
 
-**Security Relevance:**
 
-A Web Application Firewall helps monitor and filter potentially malicious HTTP traffic.
+**Note**: The actual subnet, number of hosts and addresses should be replaced with the results from my own network when submitting the report.
 
-Identifying the WAF technology provides insight into the defensive mechanisms protecting a web application.
 
-**Evidence:**
-![WAFW00F Result](wafwof.png.png)
 
+
+
+## 5. Risk Analysis / Impact 
+Based on the information collected during the footprinting and network scanning activities, I identified the following potential risks. 
+
+| # | Risk / Finding | Evidence / Observation | Potential Impact | Risk Level |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | Web technology information exposed | WhatWeb identified WordPress and WP Download Manager | Attackers may use exposed technology/version information to identify software requiring further security review | 🟠 Medium |
+| 2 | Server IP address identifiable | Nslookup resolved the domain to 192.232.216.135 | Provides information about the network location of the web service | 🟡 Low |
+| 3 | HTTP technical information exposed | Curl returned HTTP response headers and exposed /wp-json/ | May assist technology fingerprinting and further enumeration | 🟡 Low |
+| 4 | WAF technology identifiable | Wafw00f identified ModSecurity (SpiderLabs) | Reveals information about the web application's security architecture | 🟡 Low |
+| 5 | DNS infrastructure information exposed | DNSRecon identified DNS, mail and service-related records | DNS information can help build a broader infrastructure profile | 🟠 Medium |
+| 6 | Multiple live hosts visible on local network | Zenmap identified four live hosts in the example network | Unknown or unauthorized devices may potentially be present on a network | 🟠 Medium |
+
+**Risk level key:** 🔴 Critical • 🟠 Medium • 🟡 Low
+
+The risks above are observations from the footprinting and scanning exercises, not confirmed vulnerabilities. 
+
+The practical exercises primarily involved information gathering and host discovery. No exploitation or vulnerability validation was performed as part of these two modules. 
+
+Therefore, the presence of information such as a software version, IP address or DNS record does not by itself mean that the system is vulnerable. Further authorized security testing would be required to confirm any actual vulnerability. 
+
+## 6. Recommendations 
+Based on the observations from these activities, I recommend the following security improvements: 
+
+1. **Review publicly exposed technology information** 
+   Organizations should regularly review what information about their web technologies, CMS and plugins is publicly visible.
+
+   
+2. **Keep software updated**
+  
+   CMS platforms, plugins and other web technologies should be regularly updated and reviewed against current security advisories.
+
+   
+3. **Review HTTP headers**
+
+ 
+   HTTP response headers should be reviewed to determine whether unnecessary technical information is being exposed.
+
+   
+4. **Review DNS records regularly**
+
+  
+   DNS records should be checked periodically to ensure that only required information and services are publicly exposed.
+
+   
+5. **Properly configure and monitor the WAF**
+
+ 
+   Keep the WAF (ModSecurity) enabled and tuned, since it already blocks naive attacks.
+
+   
+6. **Perform regular internal network discovery**
+
+  
+   Organizations should periodically scan their own networks to identify active devices.
+
+   
+8. Investigate unknown devices 
+   Any unexpected device discovered during network scanning should be investigated and verified.
+9. Maintain network documentation 
+   Network topology and device information should be documented and updated regularly.
+10. Perform security testing with authorization 
+   Reconnaissance and scanning should only be performed against systems and networks where appropriate authorization has been provided.
+
+## 7. Conclusion 
+During Week 2 of my Cybersecurity & Ethical Hacking internship, I completed practical activities covering footprinting, reconnaissance and network scanning. 
+
+In the footprinting activity, I used six Kali Linux tools to collect information about the target domain. I learned how WHOIS can provide domain information, WhatWeb can identify web technologies, Nslookup can resolve domain names, Curl can inspect HTTP headers, Wafw00f can identify a WAF, and DNSRecon can provide additional DNS information. 
+
+In the network scanning activity, I used Zenmap to identify my local network configuration and discover active hosts. I also collected IP and MAC address information and created a network topology. 
+
+The exercises showed me that information gathering is an important part of cybersecurity. Even before attempting to exploit a system, a security professional can learn a significant amount about an environment by carefully analyzing publicly available information and network responses. 
+
+I also learned that technical findings should be documented clearly. A good cybersecurity report should explain what was performed, what was discovered, what the observation means, what risk it may create, and what can be done to reduce that risk. 
+
+Finally, I learned that reconnaissance and scanning must always be performed within an authorized scope. These activities were completed as part of the assigned educational cybersecurity lab.
 
 ---
 
-## 7.6 DNSRecon – DNS Enumeration
+## 8. Evidences Collected
 
-**Tool:** DNSRecon
+*[Insert Screenshot of WHOIS and WhatWeb commands]*
 
-**Command:**
+*[Insert Screenshot of Nslookup and Curl commands]*
 
-```bash
-dnsrecon -d networkwalks.com
-```
+*[Insert Screenshot of Wafw00f command]*
 
-**Purpose:**
+*[Insert Screenshot of Zenmap Ping Scan results]*
 
-To enumerate DNS records associated with the target domain.
-
-**Findings:**
-
-- Name server records were identified.
-- Mail exchange records were examined.
-- TXT and SPF records were observed.
-- Additional DNS-related records were collected.
-- BIND 9.16.23 was reported in the scan results.
-- cPanel-related DNS records were identified.
-
-**Security Relevance:**
-
-DNS records provide information about an organization's internet infrastructure.
-
-Misconfigured or unnecessary DNS records can expose additional infrastructure details and potentially create security risks.
-
-**Evidence:**
-![DNS RECON Result](dnsrecon.png)
-
+*[Insert Screenshot of Zenmap Topology]*
 
 ---
+-End- 
+
+Author 
+Waqas Karim CCIE 
+Cybersecurity Professional B082 
+LinkedIn: https://www.linkedin.com/in/waqaskarim/ 
+
+Project Information 
+Program Name: Cybersecurity program at Networkwalks | Week: 02 | Repository: GitHub
+Linkedin
+Waqas Karim (CCIE) - Vodafone SOUTH AFRICA | LinkedIn
+Experience: Vodafone SOUTH AFRICA · Education: BE · Location: Johannesburg Metropolitan Area · 500+ connections on LinkedIn. View Waqas Karim (CCIE)’s...
 
-## 7.7 Nmap – Port Scanning and Service Detection
-
-**Tool:** Nmap
-
-**Commands:**
-
-```bash
-nmap -sV networkwalks.com
-```
-
-```bash
-nmap -T4 -A -v networkwalks.com
-```
-
-**Purpose:**
-
-To identify open ports, discover running services, and collect service version information from the target.
-
-**Findings:**
-
-- The target responded to network scanning.
-- Ports 80 and 443 were identified as open.
-- HTTP and HTTPS services were detected.
-- Service version detection was performed.
-- Additional port states were examined.
-
-**Security Relevance:**
-
-Open ports indicate services accessible through the network.
-
-Identifying exposed services helps security professionals evaluate the attack surface and determine whether unnecessary services should be disabled.
-
-**Evidence:**
-![NMAP Scan Result](nmap.png)
-
-
----
-
-# 8. ZENMAP – GRAPHICAL NETWORK SCANNING
-
-Zenmap provides a graphical interface for Nmap, making it easier to examine scan results, host information, network topology, and exposed services.
-
-For this exercise, I used scanme.nmap.org, the official Nmap test target.
-
-**Target:** scanme.nmap.org
-
-**IP Address:** 45.33.32.156
-
-**Scan Profile:** Intense Scan
-
-**Command:**
-
-```bash
-nmap -T4 -A -v scanme.nmap.org
-```
-
-## 8.1 Zenmap Intense Scan
-
-**Purpose:**
-
-To perform detailed network scanning involving service detection, operating system detection, and traceroute.
-
-**Findings:**
-
-- The target was identified as live.
-- Service detection was performed.
-- Operating system detection was attempted.
-- Traceroute information was collected.
-- Open ports and associated services were examined.
-
-**Evidence:**
-![Zenmap intense scan Result](zenmapintensescan.png)
-
-
----
-
-## 8.2 Ports and Hosts View
-
-**Purpose:**
-
-To examine discovered hosts, open ports, and associated services through Zenmap's graphical interface.
-
-**Findings:**
-
-- Multiple open ports were identified.
-- Services associated with the discovered ports were displayed.
-- Port information was organized for easier examination.
-- The interface made it easier to review exposed services.
-
-**Evidence:**
-![Zenmap ports and hosts Result](zenmapportsandhost.png)
-
-
----
-
-## 8.3 Network Topology View
-
-**Purpose:**
-
-To visualize the network path between the scanning machine and the target.
-
-**Findings:**
-
-- The topology view displayed the relationship between the scanning machine and target.
-- Network hops were visualized.
-- The graphical representation provided a clearer understanding of the route to the target.
-
-**Evidence:**
-![Zenmap topology Result](zenmaptopology.png)
-
-
----
-
-## 8.4 Hosts Viewer
-
-**Purpose:**
-
-To examine discovered host information and operating system detection results.
-
-**Findings:**
-
-- The target host information was displayed.
-- Linux was reported as the operating system match.
-- Open port information was available.
-- Host details were presented in a centralized interface.
-
-**Evidence:**
-![Zenmap host Result](zenmaphostdetails.png)
-
-
----
-
-# 9. ERRORS ENCOUNTERED AND SOLUTIONS
-
-During the practical exercises, I encountered some technical challenges while working with the tools.
-
-| Error / Challenge          | Possible Cause                                     | Solution                                        |
-| -------------------------- | -------------------------------------------------- | ----------------------------------------------- |
-| DNSRecon command not found | Tool was not installed                             | Installed DNSRecon using APT                    |
-| WHOIS timeout              | Network delay or server response delay             | Retried the command after checking connectivity |
-| cURL connection delay      | Slow network or HTTPS handshake delay              | Checked connectivity and retried                |
-| WAFW00F scan delay         | Multiple HTTP requests during detection            | Allowed the scan to complete                    |
-| Nmap scan delay            | Extensive scanning and network filtering           | Reviewed scan options and allowed completion    |
-| Zenmap scan delay          | Intense Scan performs several detection activities | Waited for the scan to finish                   |
-
-**Lesson Learned:**
-
-Troubleshooting is an important part of penetration testing. Understanding why a tool fails makes it easier to resolve problems and obtain reliable results.
-
----
-
-# 10. RISK ANALYSIS AND SECURITY OBSERVATIONS
-
-The following table summarizes the security observations made during the assessment.
-
-| No. | Observation                                     | Potential Security Implication                                 | Suggested Priority |
-| --- | ----------------------------------------------- | -------------------------------------------------------------- | ------------------ |
-| 1   | Public WHOIS information                        | Can support infrastructure reconnaissance                      | Low                |
-| 2   | Web technology fingerprinting                   | May reveal software requiring security updates                 | Medium             |
-| 3   | Domain IP address identification                | Provides information about hosting infrastructure              | Low                |
-| 4   | HTTP response headers                           | May reveal configuration details or missing security controls  | Medium             |
-| 5   | WAF technology identification                   | Reveals information about defensive architecture               | Low                |
-| 6   | DNS records exposed                             | Can assist infrastructure enumeration                          | Medium             |
-| 7   | HTTP and HTTPS ports exposed                    | Increases the externally accessible attack surface             | Medium             |
-| 8   | Multiple services identified on scanme.nmap.org | Provides information about exposed services on the test target | Informational      |
-| 9   | Operating system fingerprinting                 | May help identify platform-specific attack opportunities       | Low                |
-
-**Risk Assessment Note:**
-
-These observations represent potential security considerations, not confirmed vulnerabilities.
-
-No exploitation or vulnerability verification was performed. The risk priorities are preliminary and should be validated through further authorized assessment.
-
----
-
-# 11. SECURITY RECOMMENDATIONS
-
-Based on the observations, the following defensive recommendations are proposed:
-
-1. **Domain Information:** Review publicly available registration information and enable domain privacy where appropriate.
-
-2. **Software Updates:** Keep WordPress, plugins, and other web components updated.
-
-3. **Infrastructure Protection:** Apply appropriate network controls to protect the origin server.
-
-4. **HTTP Security:** Review HTTP response headers and implement appropriate security headers.
-
-5. **WAF Configuration:** Maintain updated ModSecurity rulesets and regularly review security logs.
-
-6. **DNS Security:** Regularly audit DNS records and remove obsolete entries.
-
-7. **Port Management:** Disable unnecessary services and restrict access to sensitive ports.
-
-8. **Operating System Security:** Maintain current security patches and apply appropriate host firewall policies.
-
----
-
-# 12. LESSONS LEARNED
-
-This practical exercise improved my understanding of several cybersecurity concepts.
-
-**1. Footprinting and Reconnaissance**
-
-I learned how to gather information about a target using different reconnaissance tools.
-
-**2. Domain Intelligence**
-
-I gained practical experience retrieving domain registration and DNS information using WHOIS and DNSRecon.
-
-**3. Technology Fingerprinting**
-
-I learned how WhatWeb identifies website technologies and software components.
-
-**4. HTTP Analysis**
-
-I understood how to inspect HTTP response headers using cURL.
-
-**5. Web Application Firewall Detection**
-
-I gained experience identifying WAF technologies using WAFW00F.
-
-**6. Network Scanning**
-
-I learned how Nmap identifies active hosts, open ports, and running services.
-
-**7. Network Visualization**
-
-I explored Zenmap's graphical features, including Ports/Hosts, Topology, and Hosts Viewer.
-
-**8. Technical Documentation**
-
-I learned the importance of documenting commands, evidence, findings, and recommendations in a structured penetration testing report.
-
----
-
-# 13. CONCLUSION
-
-Week 2 of my Cybersecurity Internship at Networkwalks provided an opportunity to gain practical experience in footprinting, reconnaissance, network scanning, and security analysis.
-
-Throughout the exercise, I worked with several Kali Linux tools, including WHOIS, WhatWeb, Nslookup, cURL, WAFW00F, DNSRecon, and Nmap.
-
-I also used Zenmap to perform graphical network scanning against the official Nmap test target, scanme.nmap.org.
-
-One important takeaway was that reconnaissance plays a significant role in understanding an organization's digital infrastructure before deeper security assessments are conducted.
-
-I also learned that identifying an open port, exposed technology, or publicly available information does not automatically mean a vulnerability exists. Proper validation and contextual analysis are necessary before assigning security risks.
-
-Overall, this exercise strengthened my practical understanding of reconnaissance methodologies, network scanning, security observations, and professional penetration testing documentation.
-
----
-
----
-
-# 14. REFERENCES
-
-- Networkwalks: [https://networkwalks.com](https://networkwalks.com)
-- Nmap Official Website: [https://nmap.org/](https://nmap.org/)
-- Nmap Scanme Test Target: [https://scanme.nmap.org/](https://scanme.nmap.org/)
-- Kali Linux Tools: [https://www.kali.org/tools/](https://www.kali.org/tools/)
-- WHOIS Documentation: [https://www.kali.org/tools/whois/](https://www.kali.org/tools/whois/)
-- WhatWeb Documentation: [https://www.kali.org/tools/whatweb/](https://www.kali.org/tools/whatweb/)
-- DNSRecon Documentation: [https://www.kali.org/tools/dnsrecon/](https://www.kali.org/tools/dnsrecon/)
-- WAFW00F Documentation: [https://www.kali.org/tools/wafw00f/](https://www.kali.org/tools/wafw00f/)
-- Nmap Documentation: [https://nmap.org/book/](https://nmap.org/book/)
-- cURL Documentation: [https://curl.se/docs/](https://curl.se/docs/)
-
----
-
-## AUTHOR
-
-**Idowu Oluwaferanmi Emmanuel**
-
-Cybersecurity Intern | Networkwalks
-
-Program: Cybersecurity Internship
-Batch: B084
-Week: 02
-Topic: Footprinting, Network Scanning and Vulnerability Assessment
-
-GitHub: [https://github.com/emmanuel101cyber](https://github.com/emmanuel101cyber)
-
----
-
-**END OF REPORT**
