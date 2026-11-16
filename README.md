@@ -163,12 +163,24 @@ Based on the observations from these activities, I recommend the following secur
    Organizations should periodically scan their own networks to identify active devices.
 
    
-8. Investigate unknown devices 
+7. **Investigate unknown devices**
+
+  
    Any unexpected device discovered during network scanning should be investigated and verified.
-9. Maintain network documentation 
+
+   
+8. **Maintain network documentation**
+
+ 
    Network topology and device information should be documented and updated regularly.
-10. Perform security testing with authorization 
+
+   
+9. **Perform security testing with authorization**
+
+  
    Reconnaissance and scanning should only be performed against systems and networks where appropriate authorization has been provided.
+
+   
 
 ## 7. Conclusion 
 During Week 2 of my Cybersecurity & Ethical Hacking internship, I completed practical activities covering footprinting, reconnaissance and network scanning. 
