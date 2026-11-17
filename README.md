@@ -208,6 +208,7 @@ Finally, I learned that reconnaissance and scanning must always be performed wit
 ![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/curl.png?raw=true)
 
 ![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/wafw00f.png?raw=true)
+
 ![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/Screenshot%202026-11-17%20152257.png?raw=true)
 
 
@@ -215,13 +216,11 @@ Finally, I learned that reconnaissance and scanning must always be performed wit
 -End- 
 
 Author 
-Waqas Karim CCIE 
-Cybersecurity Professional B082 
-LinkedIn: https://www.linkedin.com/in/waqaskarim/ 
+K. M. AL TASIN KABIR 
+Cybersecurity Intern 
+Batch: B084 
+LinkedIn:www.linkedin.com/in/k-m-al-tasin-kabir 
 
 Project Information 
 Program Name: Cybersecurity program at Networkwalks | Week: 02 | Repository: GitHub
-Linkedin
-Waqas Karim (CCIE) - Vodafone SOUTH AFRICA | LinkedIn
-Experience: Vodafone SOUTH AFRICA · Education: BE · Location: Johannesburg Metropolitan Area · 500+ connections on LinkedIn. View Waqas Karim (CCIE)’s...
 
