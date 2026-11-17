@@ -199,7 +199,7 @@ Finally, I learned that reconnaissance and scanning must always be performed wit
 
 ## 8. Evidences Collected
 
-*[Insert Screenshot of WHOIS and WhatWeb commands]*
+![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/whois.png?raw=true)
 
 *[Insert Screenshot of Nslookup and Curl commands]*
 
