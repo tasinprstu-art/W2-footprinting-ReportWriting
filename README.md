@@ -218,15 +218,11 @@ Finally, I learned that reconnaissance and scanning must always be performed wit
 **Author** 
 
 **K. M. AL TASIN KABIR**
-
 Cybersecurity Intern 
-
 Batch: B084 
-
 LinkedIn:www.linkedin.com/in/k-m-al-tasin-kabir 
 
 
 **Project Information** 
-
 **Program Name**: Cybersecurity program at Networkwalks | **Week:** 02 | **Repository:** GitHub
 
