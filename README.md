@@ -208,6 +208,8 @@ Finally, I learned that reconnaissance and scanning must always be performed wit
 ![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/curl.png?raw=true)
 
 ![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/wafw00f.png?raw=true)
+![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/Screenshot%202026-11-17%20152257.png?raw=true)
+
 
 ---
 -End- 
