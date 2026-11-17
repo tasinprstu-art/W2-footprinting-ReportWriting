@@ -205,7 +205,7 @@ Finally, I learned that reconnaissance and scanning must always be performed wit
 
 ![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/nslookup.png?raw=true)
 
-![image alt]
+![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/curl.png?raw=true)
 
 ![image alt]
 
