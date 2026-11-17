@@ -201,13 +201,13 @@ Finally, I learned that reconnaissance and scanning must always be performed wit
 
 ![image alt](https://github.com/tasinprstu-art/W2-footprinting-ReportWriting/blob/main/whois.png?raw=true)
 
-*[Insert Screenshot of Nslookup and Curl commands]*
+![image alt](
 
-*[Insert Screenshot of Wafw00f command]*
+![image alt]
 
-*[Insert Screenshot of Zenmap Ping Scan results]*
+![image alt]
 
-*[Insert Screenshot of Zenmap Topology]*
+![image alt]
 
 ---
 -End- 
